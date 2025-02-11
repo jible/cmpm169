@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 5 - 3D</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
+
+    <script src="./js/threeD.js"></script>
+	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 5 -3D</h1>
+
+			<div class="minor-section">
+				<div id="canvas-container">
+					<!-- canvas will be added here -->
+				</div>
+                <div class="fullscreen-box">
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>
+					At the begining of this project, I set out to "fumble around and try to make a 3D engine."
+					I'd say I did pretty good. This is more of a 3D renderer than a 3D engine, but I'm proud of what I made in a week.
+					I pretty closely followed this tutorial	<a href="https://www.youtube.com/watch?v=ih20l3pJoeU&ab_channel=javidx9">video</a>.
+					I managed to rendere a cube and translate it around the 3D space.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>
+					I made a 3D cube, made of triangles, that are made of 3 Vector3s each. I made a projection matrix
+					that you multiiply each Vector3 by to find where they would reside in a 2D screen. The projection matrix
+					considers the aspect ratio, angle/field of vision, and aspects of the 3D world. Using the 2D points acquired with the projection matrix,
+					I drew lines connecting the points of each triangle, which created angled surfaces that emulate a 3D space.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>
+					The hardest part of this project was understanding the math, but the video was super thorough and explained it well. I encountered a few small issues setting up the cube point vectors. There were 
+					so many, it was hard to keep track and write them all correctly. But once the cube rendered, I knew what was wrong and fixed it pretty quickly. 
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>
