@@ -75,6 +75,7 @@ function drawLine(pointA, pointB){
 
 class Object3D{
   constructor(triangles){
+    this.origin = new Vector3(0,0,0)
     this.triangles = triangles
   }
   
@@ -85,11 +86,48 @@ class Object3D{
   }
   
   trans(v){
+    this.origin.x += v.x
+    this.origin.y += v.y
+    this.origin.z += v.z
     for (let tri of this.triangles){
       for (let points of tri.points){
         points.x += v.x
         points.y += v.y
         points.z += v.z
+      }
+    }
+  }
+
+  rotateX(theta) {
+    for (let tri of this.triangles) {
+      for (let point of tri.points) {
+        // Translate the point to the origin
+        let translatedPoint = new Vector3(point.x - this.origin.x, point.y - this.origin.y, point.z - this.origin.z);
+        
+        // Apply the rotation to the translated point
+        let rotatedPoint = multiplyMatrixVector(translatedPoint, new RotationXMatrix(theta));
+  
+        // Translate back to original position
+        point.x = rotatedPoint.x + this.origin.x;
+        point.y = rotatedPoint.y + this.origin.y;
+        point.z = rotatedPoint.z + this.origin.z;
+      }
+    }
+  }
+
+  rotateZ(theta) {
+    for (let tri of this.triangles) {
+      for (let point of tri.points) {
+        // Translate the point to the origin
+        let translatedPoint = new Vector3(point.x - this.origin.x, point.y - this.origin.y, point.z - this.origin.z);
+        
+        // Apply the rotation to the translated point
+        let rotatedPoint = multiplyMatrixVector(translatedPoint, new RotationZMatrix(theta));
+  
+        // Translate back to original position
+        point.x = rotatedPoint.x + this.origin.x;
+        point.y = rotatedPoint.y + this.origin.y;
+        point.z = rotatedPoint.z + this.origin.z;
       }
     }
   }
@@ -126,6 +164,31 @@ class Matrix{
 
 
 
+
+class RotationZMatrix extends Matrix{
+    constructor(theta){
+        super()
+        this.m[0][0] = Math.cos(theta)
+        this.m[0][1] = Math.sin(theta) 
+        this.m[1][0] = - Math.sin(theta)
+        this.m[1][1] = Math.cos(theta)
+        this.m[2][2] = 1
+        this.m[3][3] = 1
+    }
+}
+
+class RotationXMatrix extends Matrix {
+    constructor(theta) {
+      super();
+      this.m[0][0] = 1;
+      this.m[1][1] = Math.cos(theta);
+      this.m[1][2] = Math.sin(theta);
+      this.m[2][1] = -Math.sin(theta);
+      this.m[2][2] = Math.cos(theta);
+      this.m[3][3] = 1;
+    }
+  }
+  
 
 
 // Configure Projection Matrix
